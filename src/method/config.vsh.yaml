@@ -10,7 +10,6 @@ functionality:
       required: true
       type: file
       multiple: true
-      multiple_sep: ";"
     - name: --output
       description: Output file
       required: true
@@ -21,7 +20,6 @@ functionality:
       required: true
       type: file
       multiple: true
-      multiple_sep: ";"
       direction: output
     - name: --output_resource
       type: file
