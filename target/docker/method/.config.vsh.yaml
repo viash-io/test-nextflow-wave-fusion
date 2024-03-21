@@ -137,5 +137,5 @@ info:
   output: "target/docker/method"
   executable: "target/docker/method/method"
   viash_version: "0.8.6-dev"
-  git_commit: "1c960baf76791c91c090a7eb1e0b7e618ec3e37b"
+  git_commit: "ca92c1bf641dc37022dd9137ed3c4f47f6948565"
   git_remote: "https://github.com/viash-io/test-nextflow-wave-fusion"

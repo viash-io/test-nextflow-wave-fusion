@@ -2,7 +2,9 @@
 
 set -e
 
-OUT=output/local_with_remote
+script_name=$(basename "$0")
+OUT=output/${script_name%.sh}
+RES=s3://data-intuitive-tmp/test-nextflow-wave-fusion/resources
 
 # clear output dir
 [ -d "$OUT" ] && rm -r "$OUT"
@@ -13,8 +15,9 @@ NXF_VER=23.10.0 nextflow run \
   -r main_build \
   -main-script target/nextflow/method/main.nf \
   -profile docker \
-  --input resources/input1.txt \
-  --multiple_input "resources/input1.txt;resources/input2.txt" \
+  -latest \
+  --input $RES/input1.txt \
+  --multiple_input "$RES/input1.txt;$RES/input2.txt" \
   --publish_dir "$OUT"
 
 # check if output is correct
