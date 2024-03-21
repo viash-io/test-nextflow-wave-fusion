@@ -417,9 +417,9 @@ ENTRYPOINT []
  
 RUN :
 LABEL org.opencontainers.image.description="Companion container for running component method"
-LABEL org.opencontainers.image.created="2024-03-21T11:19:38Z"
+LABEL org.opencontainers.image.created="2024-03-21T11:23:04Z"
 LABEL org.opencontainers.image.source="https://github.com/viash-io/test-nextflow-wave-fusion"
-LABEL org.opencontainers.image.revision="4034fdd0be530812b80c00b3b1c3219804b22daf"
+LABEL org.opencontainers.image.revision="2585032d0f12186f442fbebef2d313970becbbbd"
 LABEL org.opencontainers.image.version="main_build"
 
 VIASHDOCKER
