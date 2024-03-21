@@ -1,0 +1,10 @@
+# Arguments
+input: # please fill in - example: "path/to/file"
+multiple_input: # please fill in - example: ["path/to/file"]
+# output: "$id.$key.output.output"
+# multiple_output: ["$id.$key.multiple_output_*.multiple_output_*"]
+# output_resource: "$id.$key.output_resource.output_resource"
+
+# Nextflow input-output arguments
+publish_dir: # please fill in - example: "output/"
+# param_list: "my_params.yaml"

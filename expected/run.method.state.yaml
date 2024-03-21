@@ -1,0 +1,7 @@
+id: run
+output: !file run.method.output
+multiple_output:
+- !file run.method.multiple_output_0
+- !file run.method.multiple_output_1
+output_resource: !file run.method.output_resource
+
