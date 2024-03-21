@@ -20,7 +20,7 @@ jobs:
           path: ~/.local/bin/viash
           key: viash
   
-      - uses: viash-io/viash-actions/setup@v4
+      - uses: viash-io/viash-actions/setup@v5
         if: ${{ hashFiles('~/.local/bin/viash') == '' }}
         with:
           version: "@develop_0_8"
@@ -30,13 +30,13 @@ jobs:
           # allow publishing the target folder
           sed -i '/^target.*/d' .gitignore
 
-      - uses: viash-io/viash-actions/ns-build@v4
+      - uses: viash-io/viash-actions/ns-build@v5
         with:
           config_mod: .functionality.version := 'main_build'
           parallel: true
 
       - name: Build nextflow schemas
-        uses: viash-io/viash-actions/pro/build-nextflow-schemas@v4
+        uses: viash-io/viash-actions/pro/build-nextflow-schemas@v5
         with:
           workflows: src
           components: src
@@ -44,7 +44,7 @@ jobs:
           tools_version: 'main_build'
     
       - name: Build parameter files
-        uses: viash-io/viash-actions/pro/build-nextflow-params@v4
+        uses: viash-io/viash-actions/pro/build-nextflow-params@v5
         with:
           workflows: src
           components: src
@@ -59,7 +59,7 @@ jobs:
           publish_branch: main_build
 
       - id: ns_list
-        uses: viash-io/viash-actions/ns-list@v4
+        uses: viash-io/viash-actions/ns-list@v5
         with:
           platform: docker
           src: src
@@ -97,7 +97,7 @@ jobs:
         key: viash
 
     - name: Build container
-      uses: viash-io/viash-actions/ns-build@v4
+      uses: viash-io/viash-actions/ns-build@v5
       with:
         config_mod: .functionality.version := 'main_build'
         platform: docker
@@ -112,7 +112,7 @@ jobs:
         password: ${{ secrets.GTHB_PAT }}
 
     - name: Push container
-      uses: viash-io/viash-actions/ns-build@v4
+      uses: viash-io/viash-actions/ns-build@v5
       with:
         config_mod: .functionality.version := 'main_build'
         platform: docker
