@@ -5,7 +5,7 @@ set -e
 OUT=output/local
 
 # clear output dir
-rm -r "$OUT"
+[ -d "$OUT" ] && rm -r "$OUT"
 
 # run component
 NXF_VER=23.10.0 nextflow run \
