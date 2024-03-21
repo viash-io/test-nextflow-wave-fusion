@@ -14,8 +14,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+    
+      - uses: actions/cache@v4
+        with:
+          path: ~/.local/bin/viash
+          key: viash
+  
       - uses: viash-io/viash-actions/setup@v4
+        if: ${{ hashFiles('~/.local/bin/viash') != '' }}
         with:
           version: "@develop_0_8"
 
@@ -84,10 +90,11 @@ jobs:
     - uses: data-intuitive/reclaim-the-bytes@v2
     
     - uses: actions/checkout@v4
-
-    - uses: viash-io/viash-actions/setup@v4
+    
+    - uses: actions/cache@v4
       with:
-        version: "@develop_0_8"
+        path: ~/.local/bin/viash
+        key: viash
 
     - name: Build container
       uses: viash-io/viash-actions/ns-build@v4
