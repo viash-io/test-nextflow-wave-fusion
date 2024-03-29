@@ -23,7 +23,7 @@ jobs:
       - uses: viash-io/viash-actions/setup@v5
         if: ${{ hashFiles('~/.local/bin/viash') == '' }}
         with:
-          version: "@fix/vdsl3"
+          version: "@fix_vdsl3"
 
       - name: Remove target folder from .gitignore
         run: |
