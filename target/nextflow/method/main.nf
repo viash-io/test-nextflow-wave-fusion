@@ -2944,7 +2944,7 @@ meta = [
     "platform" : "nextflow",
     "output" : "target/nextflow/method",
     "viash_version" : "0.8.6-dev",
-    "git_commit" : "07a2119eedf3526875141845efb9c85fcff665a2",
+    "git_commit" : "d9d51a8ba633c6f772f6324d1a7c407b68761213",
     "git_remote" : "https://github.com/viash-io/test-nextflow-wave-fusion"
   }
 }'''))
@@ -3317,19 +3317,22 @@ def _vdsl3ProcessFactory(Map workflowArgs, Map meta, String rawScript) {
   //   println("######################\n$procStr\n######################")
   // }
 
-  // create runtime process
-  def ownerParams = new nextflow.script.ScriptBinding.ParamsMap()
-  def binding = new nextflow.script.ScriptBinding().setParams(ownerParams)
-  def module = new nextflow.script.IncludeDef.Module(name: procKey)
+  // write process to temp file
+  def tempFile = java.nio.file.Files.createTempFile("viash-process-${procKey}-", ".nf")
+  addShutdownHook { java.nio.file.Files.deleteIfExists(tempFile) }
+  tempFile.text = procStr
+
+  // create process from temp file
+  def binding = new nextflow.script.ScriptBinding([:])
   def session = nextflow.Nextflow.getSession()
-  def scriptParser = new nextflow.script.ScriptParser(session)
+  def parser = new nextflow.script.ScriptParser(session)
     .setModule(true)
     .setBinding(binding)
-  scriptParser.scriptPath = scriptMeta.getScriptPath()
-  def moduleScript = scriptParser.runScript(procStr)
+  def moduleScript = parser.runScript(tempFile)
     .getScript()
 
   // register module in meta
+  def module = new nextflow.script.IncludeDef.Module(name: procKey)
   scriptMeta.addModule(moduleScript, module.name, module.alias)
 
   // retrieve and return process from meta
