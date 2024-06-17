@@ -9,10 +9,33 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         include:
+          - name: "build_0_7_0"
+            viash_version: "0.7.0"
+          - name: "build_0_7_1"
+            viash_version: "0.7.1"
+          - name: "build_0_7_2"
+            viash_version: "0.7.2"
+          - name: "build_0_7_3"
+            viash_version: "0.7.3"
+          - name: "build_0_7_4"
+            viash_version: "0.7.4"
           - name: "build_0_7_5"
             viash_version: "0.7.5"
+          - name: "build_0_8_0"
+            viash_version: "0.8.0"
+          - name: "build_0_8_1"
+            viash_version: "0.8.1"
+          - name: "build_0_8_2"
+            viash_version: "0.8.2"
+          - name: "build_0_8_3"
+            viash_version: "0.8.3"
+          - name: "build_0_8_4"
+            viash_version: "0.8.4"
+          - name: "build_0_8_5"
+            viash_version: "0.8.5"
           - name: "build_0_8_6"
             viash_version: "0.8.6"
           - name: "build_0_9_0_RC6"
