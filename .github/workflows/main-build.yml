@@ -31,12 +31,14 @@ jobs:
         with:
           version: ${{ matrix.viash_version }}
       
-      - name: Specify Viash version
+      - name: Specify package version
         run: |
           if [[ ${{ matrix.name }} ~= "build_0_9" ]]; then
             cp _viash_0.9.yaml _viash.yaml
+            echo "version: ${{matrix.name}}" >> _viash.yaml
+          else
+            sed -i "s/'dev'/'${{ matrix.name }}'/g" _viash.yaml
           fi
-          echo "viash_version: ${{ matrix.viash_version }}" >> _viash.yaml
 
       - name: Remove target folder from .gitignore
         run: |
@@ -45,7 +47,6 @@ jobs:
 
       - uses: viash-io/viash-actions/ns-build@v5
         with:
-          config_mod: ${{ matrix.config_mod }}
           parallel: true
 
       - name: Deploy to target branch
@@ -59,7 +60,6 @@ jobs:
         uses: viash-io/viash-actions/ns-build@v5
         with:
           parallel: true
-          config_mod: ${{ matrix.config_mod }}
           platform: docker
           setup: build
           
@@ -73,6 +73,5 @@ jobs:
       - name: Push container
         uses: viash-io/viash-actions/ns-build@v5
         with:
-          config_mod: ${{ matrix.config_mod }}
           platform: docker
           setup: push
