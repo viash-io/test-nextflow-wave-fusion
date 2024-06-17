@@ -188,7 +188,7 @@ thisConfig = processConfig(jsonSlurper.parseText('''{
     "platform" : "nextflow",
     "output" : "target/nextflow/method",
     "viash_version" : "0.7.5",
-    "git_commit" : "766e5e767623434f7965626116cddabe4993d075",
+    "git_commit" : "676d5303c00ee01cfa1d5e0ee8a7b3b7790d4bd7",
     "git_remote" : "https://github.com/viash-io/test-nextflow-wave-fusion"
   }
 }'''))
