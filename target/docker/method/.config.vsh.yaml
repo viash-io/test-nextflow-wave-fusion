@@ -1,0 +1,102 @@
+functionality:
+  name: "method"
+  version: "build_0_7_3"
+  arguments:
+  - type: "file"
+    name: "--input"
+    description: "Input file"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ":"
+    dest: "par"
+  - type: "file"
+    name: "--multiple_input"
+    description: "Multiple input files"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: true
+    multiple_sep: ";"
+    dest: "par"
+  - type: "file"
+    name: "--output"
+    description: "Output file"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ":"
+    dest: "par"
+  - type: "file"
+    name: "--multiple_output"
+    description: "Multiple output files"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: true
+    multiple_sep: ";"
+    dest: "par"
+  - type: "file"
+    name: "--output_resource"
+    description: "Output resource"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ":"
+    dest: "par"
+  resources:
+  - type: "bash_script"
+    path: "script.sh"
+    is_executable: true
+  - type: "file"
+    path: "resource.txt"
+  test_resources:
+  - type: "bash_script"
+    path: "test.sh"
+    is_executable: true
+  - type: "file"
+    path: "resources"
+  status: "enabled"
+  requirements:
+    commands:
+    - "ps"
+  set_wd_to_resources_dir: false
+platforms:
+- type: "docker"
+  id: "docker"
+  image: "ubuntu:latest"
+  target_organization: "viash-io/test-nextflow-wave-fusion"
+  target_registry: "ghcr.io"
+  namespace_separator: "/"
+  resolve_volume: "Automatic"
+  chown: true
+  setup_strategy: "ifneedbepullelsecachedbuild"
+  target_image_source: "https://github.com/viash-io/test-nextflow-wave-fusion"
+- type: "nextflow"
+  id: "nextflow"
+  variant: "vdsl3"
+  directives:
+    tag: "$id"
+  auto:
+    simplifyInput: true
+    simplifyOutput: false
+    transcript: false
+    publish: false
+  debug: false
+  container: "docker"
+info:
+  config: "/home/runner/work/test-nextflow-wave-fusion/test-nextflow-wave-fusion/src/method/config.vsh.yaml"
+  platform: "docker"
+  output: "target/docker/method"
+  executable: "target/docker/method/method"
+  viash_version: "0.7.3"
+  git_commit: "d6756ec524cf0efd65cbd04be4d49c60f40127a5"
+  git_remote: "https://github.com/viash-io/test-nextflow-wave-fusion"
