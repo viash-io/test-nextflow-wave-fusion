@@ -8,6 +8,7 @@ OUT=output/${script_name%.sh}
 RES=s3://data-intuitive-tmp/test-nextflow-wave-fusion/resources
 WORK=s3://data-intuitive-tmp/test-nextflow-wave-fusion/work/${script_name%.sh}
 NXF_CONFIG=/tmp/${script_name%.sh}.config
+PARAMS=/tmp/${script_name%.sh}.yaml
 
 # set aws profile
 export AWS_PROFILE=di
@@ -36,18 +37,21 @@ aws {
 }
 EOF
 
+cat > $PARAMS <<EOF
+input: $RES/input1.txt
+multiple_input: "$RES/input1.txt;$RES/input2.txt"
+publish_dir: "$TMPOUT"
+EOF
 
-NXF_VER=23.10.1 nextflow run \
+tw launch \
   viash-io/test-nextflow-wave-fusion \
-  -r main_build \
-  -main-script target/nextflow/method/main.nf \
-  -profile docker \
-  -w $WORK \
-  -c $NXF_CONFIG \
-  -latest \
-  --input $RES/input1.txt \
-  --multiple_input "$RES/input1.txt;$RES/input2.txt" \
-  --publish_dir "$TMPOUT"
+  --revision main_build \
+  --main-script target/nextflow/method/main.nf \
+  --work-dir $WORK \
+  --workspace XXX \
+  --compute-env YYY \
+  --config $NXF_CONFIG \
+  --params-file $PARAMS
 
 # sync output
 echo "Syncing output"
