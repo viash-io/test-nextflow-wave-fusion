@@ -48,6 +48,7 @@ jobs:
       - uses: viash-io/viash-actions/ns-build@v5
         with:
           parallel: true
+          setup: build
 
       - name: Deploy to target branch
         uses: peaceiris/actions-gh-pages@v4
@@ -55,13 +56,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
           publish_branch: '${{ matrix.name }}'
-
-      - name: Build container
-        uses: viash-io/viash-actions/ns-build@v5
-        with:
-          parallel: true
-          platform: docker
-          setup: build
           
       - name: Login to container registry
         uses: docker/login-action@v3
@@ -71,7 +65,9 @@ jobs:
           password: ${{ secrets.GTHB_PAT }}
 
       - name: Push container
-        uses: viash-io/viash-actions/ns-build@v5
-        with:
-          platform: docker
-          setup: push
+        run: |
+          if [[ ${{ matrix.name }} == build_0_9_* ]]; then
+            viash ns build --setup push --parallel --engine docker
+          else
+            viash ns build --setup push --parallel --platform docker
+          fi
