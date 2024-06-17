@@ -9,6 +9,10 @@ RES=s3://data-intuitive-tmp/test-nextflow-wave-fusion/resources
 WORK=s3://data-intuitive-tmp/test-nextflow-wave-fusion/work/${script_name%.sh}
 NXF_CONFIG=/tmp/${script_name%.sh}.config
 
+# set aws profile
+export AWS_PROFILE=di
+echo "aws profile: $AWS_PROFILE"
+
 # clear output dir
 echo "Clearing output directory"
 aws s3 rm $TMPOUT --recursive
