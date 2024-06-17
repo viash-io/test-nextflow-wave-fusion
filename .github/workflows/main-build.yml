@@ -11,11 +11,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: "0_7_5"
+          - name: "build_0_7_5"
             viash_version: "0.7.5"
-          - name: "0_8_6"
+          - name: "build_0_8_6"
             viash_version: "0.8.6"
-          - name: "0_9_0_RC6"
+          - name: "build_0_9_0_RC6"
             viash_version: "0.9.0-RC6"
 
     steps:
@@ -38,37 +38,21 @@ jobs:
 
       - uses: viash-io/viash-actions/ns-build@v5
         with:
-          config_mod: .functionality.version := 'build_${{ matrix.name }}'
+          config_mod: .functionality.version := '${{ matrix.name }}'
           parallel: true
 
-      - name: Build nextflow schemas
-        uses: viash-io/viash-actions/pro/build-nextflow-schemas@v5
-        with:
-          workflows: src
-          components: src
-          viash_pro_token: ${{ secrets.GTHB_PAT }}
-          tools_version: 'build_${{ matrix.name }}'
-    
-      - name: Build parameter files
-        uses: viash-io/viash-actions/pro/build-nextflow-params@v5
-        with:
-          workflows: src
-          components: src
-          viash_pro_token: ${{ secrets.GTHB_PAT }}
-          tools_version: 'build_${{ matrix.name }}'
-
       - name: Deploy to target branch
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: .
-          publish_branch: 'build_${{ matrix.name }}'
+          publish_branch: '${{ matrix.name }}'
 
       - name: Build container
         uses: viash-io/viash-actions/ns-build@v5
         with:
           parallel: true
-          config_mod: .functionality.version := 'build_${{ matrix.name }}'
+          config_mod: .functionality.version := '${{ matrix.name }}'
           platform: docker
           setup: build
           
@@ -82,6 +66,6 @@ jobs:
       - name: Push container
         uses: viash-io/viash-actions/ns-build@v5
         with:
-          config_mod: .functionality.version := 'build_${{ matrix.name }}'
+          config_mod: .functionality.version := '${{ matrix.name }}'
           platform: docker
           setup: push
