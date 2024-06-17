@@ -1,0 +1,40 @@
+functionality:
+  name: method
+  arguments:
+    - name: --input
+      description: Input file
+      required: true
+      type: file
+    - name: --multiple_input
+      description: Multiple input files
+      required: true
+      type: file
+      multiple: true
+    - name: --output
+      description: Output file
+      required: true
+      type: file
+      direction: output
+    - name: --multiple_output
+      description: Multiple output files
+      required: true
+      type: file
+      multiple: true
+      direction: output
+    - name: --output_resource
+      type: file
+      required: true
+      description: Output resource
+      direction: output
+  resources:
+    - type: bash_script
+      path: script.sh
+    - path: resource.txt
+  test_resources:
+    - type: bash_script
+      path: test.sh
+    - path: /resources
+platforms:
+  - type: docker
+    image: ubuntu:latest
+  - type: nextflow
