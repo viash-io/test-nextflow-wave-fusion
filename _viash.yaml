@@ -1,5 +1,5 @@
 config_mods: |
-  .functionality.version := 'dev'
+  .functionality.version := 'build_0_7_5'
   .functionality.requirements.commands := ['ps']
   .functionality.arguments[.multiple == true].multiple_sep := ";"
   .functionality.argument_groups[true].arguments[.multiple == true].multiple_sep := ";"
