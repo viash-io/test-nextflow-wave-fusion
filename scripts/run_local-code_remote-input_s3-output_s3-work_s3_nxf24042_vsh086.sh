@@ -19,7 +19,7 @@ aws s3 rm $TMPOUT --recursive
 [ -d "$OUT" ] && rm -r "$OUT"
 
 # create config
-cat > $NXF_CONFIG <<EOF
+cat > $NXF_CONFIG <<'EOF'
 fusion {
     enabled = true
 }
@@ -36,9 +36,9 @@ EOF
 
 # run component
 echo "Running component"
-NXF_VER=23.10.1 nextflow run \
+NXF_VER=24.04.2 nextflow run \
   viash-io/test-nextflow-wave-fusion \
-  -r main_build \
+  -r build_0_8_6 \
   -main-script target/nextflow/method/main.nf \
   -profile docker \
   -latest \
