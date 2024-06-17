@@ -14,33 +14,30 @@ echo "Clearing output directory"
 aws s3 rm $TMPOUT --recursive
 [ -d "$OUT" ] && rm -r "$OUT"
 
-# run component
-echo "Running component"
+echo "aws profile: $AWS_PROFILE"
 
+# create config
 cat > $NXF_CONFIG <<EOF
-process {
-    executor = 'awsbatch'
-    queue = 'nextflow_queue_nofusion'
-    container = 'bash:4.0'
+fusion {
+    enabled = true
+    exportStorageCredentials = true
 }
 
-aws {
-    region = 'eu-west-1'
-    batch {
-        cliPath = '/home/ec2-user/miniconda/bin/aws'
-    }
+wave {
+    enabled = true
 }
 EOF
 
 
+# run component
+echo "Running component"
 NXF_VER=23.10.1 nextflow run \
-  viash-io/test-nextflow-wave-fusion \
-  -r main_build \
+  . \
   -main-script target/nextflow/method/main.nf \
   -profile docker \
+  -latest \
   -w $WORK \
   -c $NXF_CONFIG \
-  -latest \
   --input $RES/input1.txt \
   --multiple_input "$RES/input1.txt;$RES/input2.txt" \
   --publish_dir "$TMPOUT"

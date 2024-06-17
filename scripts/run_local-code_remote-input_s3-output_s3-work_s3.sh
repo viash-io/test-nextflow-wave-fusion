@@ -29,7 +29,7 @@ EOF
 
 # run component
 echo "Running component"
-NXF_VER=23.10.0 nextflow run \
+NXF_VER=23.10.1 nextflow run \
   viash-io/test-nextflow-wave-fusion \
   -r main_build \
   -main-script target/nextflow/method/main.nf \

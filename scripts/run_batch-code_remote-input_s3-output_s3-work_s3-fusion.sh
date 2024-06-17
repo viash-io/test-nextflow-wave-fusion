@@ -20,7 +20,7 @@ echo "Running component"
 cat > $NXF_CONFIG <<EOF
 process {
     executor = 'awsbatch'
-    queue = 'nextflow_queue_nofusion'
+    queue = 'di_compute'
     container = 'bash:4.0'
 }
 
