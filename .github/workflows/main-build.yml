@@ -33,7 +33,7 @@ jobs:
       
       - name: Specify package version
         run: |
-          if [[ ${{ matrix.name }} ~= "build_0_9" ]]; then
+          if [[ ${{ matrix.name }} == build_0_9_* ]]; then
             cp _viash_0.9.yaml _viash.yaml
             echo "version: ${{matrix.name}}" >> _viash.yaml
           else
