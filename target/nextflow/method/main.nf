@@ -2958,7 +2958,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/method",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "676d5303c00ee01cfa1d5e0ee8a7b3b7790d4bd7",
+    "git_commit" : "2e4eec4f993a5f8c7d092f1f615306cdbe07a545",
     "git_remote" : "https://github.com/viash-io/test-nextflow-wave-fusion"
   },
   "package_config" : {
