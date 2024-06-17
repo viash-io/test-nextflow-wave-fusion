@@ -22,7 +22,6 @@ aws s3 rm $TMPOUT --recursive
 cat > $NXF_CONFIG <<EOF
 fusion {
     enabled = true
-    exportStorageCredentials = true
 }
 
 wave {
@@ -30,7 +29,7 @@ wave {
 }
 
 docker {
-  runOptions = '-e AWS_PROFILE=$AWS_PROFILE'
+  runOptions = '-v $HOME/.aws/credentials:/credentials -e AWS_SHARED_CREDENTIALS_FILE=/credentials -e AWS_PROFILE=$AWS_PROFILE'
 }
 EOF
 
