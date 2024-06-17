@@ -2938,7 +2938,7 @@ meta = [
     "platform" : "nextflow",
     "output" : "target/nextflow/method",
     "viash_version" : "0.8.5",
-    "git_commit" : "d6756ec524cf0efd65cbd04be4d49c60f40127a5",
+    "git_commit" : "766e5e767623434f7965626116cddabe4993d075",
     "git_remote" : "https://github.com/viash-io/test-nextflow-wave-fusion"
   }
 }'''))
