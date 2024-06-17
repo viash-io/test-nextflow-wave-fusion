@@ -31,6 +31,10 @@ jobs:
         with:
           version: ${{ matrix.viash_version }}
 
+      - if: ${{ startsWith(matrix.name, 'build_0_9') }}
+        run: |
+          cp _viash_0.9.yaml _viash.yaml
+
       - name: Remove target folder from .gitignore
         run: |
           # allow publishing the target folder
