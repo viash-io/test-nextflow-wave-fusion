@@ -55,7 +55,7 @@ jobs:
           path: ~/.local/bin/viash
           key: viash_${{ matrix.name }}
   
-      - uses: viash-io/viash-actions/setup@v5
+      - uses: viash-io/viash-actions/setup@v6
         if: ${{ hashFiles('~/.local/bin/viash') == '' }}
         with:
           version: ${{ matrix.viash_version }}
@@ -74,7 +74,7 @@ jobs:
           # allow publishing the target folder
           sed -i '/^target.*/d' .gitignore
 
-      - uses: viash-io/viash-actions/ns-build@v5
+      - uses: viash-io/viash-actions/ns-build@v6
         with:
           parallel: true
           setup: build
